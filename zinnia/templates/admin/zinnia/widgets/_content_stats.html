@@ -33,7 +33,14 @@
 </tr>
 <tr>
   <td>
-    <a href="{% url 'admin:auth_user_changelist' %}">
+    <!--
+    TODO: the following url was changed from 'admin:auth_user_changelist' to support our custom user model
+    it would be a good idea to monitor zinnia's progress as they further incorporate support of custom user models
+    this should be temporary, and as soon as it's fixed in zinnia we should use that instead
+
+    love, Marvin
+    -->
+    <a href="{% url 'admin:zinnia_entry_changelist' %}">
       {% blocktrans count author_count=authors %}{{ author_count }} author{% plural %}{{ author_count }} authors{% endblocktrans %}
     </a>
   </td>

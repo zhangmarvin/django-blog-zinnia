@@ -91,12 +91,20 @@ class EntryAdmin(admin.ModelAdmin):
 
     def get_authors(self, entry):
         """Return the authors in HTML"""
+        #TODO: references to author.username in this method were changed
+        # to author.get_username(), would be a good idea to monitor zinnia's
+        # progress as they further incorporate support of custom user models
+        #
+        # this should be temporary, and as soon as it's fixed in zinnia we
+        # should use that instead
+        #
+        # love, Marvin
         try:
             authors = ['<a href="%s" target="blank">%s</a>' %
-                       (author.get_absolute_url(), author.username)
+                       (author.get_absolute_url(), author.get_username())
                        for author in entry.authors.all()]
         except NoReverseMatch:
-            authors = [author.username for author in entry.authors.all()]
+            authors = [author.get_username() for author in entry.authors.all()]
         return ', '.join(authors)
     get_authors.allow_tags = True
     get_authors.short_description = _('author(s)')
